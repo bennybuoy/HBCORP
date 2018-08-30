@@ -105,7 +105,7 @@ if __name__ == "__main__":
 						send_cmd("R")
 						lines = read_lines()
 						print len(lines)
-						for i in lines:
+						for i in range(len(lines)):
 							print lines[i]
 						#print (lines[0] + ' ' + lines[1])
 						#logging.info(time.strftime("%c") + ' ORP Reading ' + lines[0] + ',' + lines[1])
