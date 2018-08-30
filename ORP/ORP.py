@@ -87,10 +87,15 @@ if __name__ == "__main__":
 		logging.info(time.strftime("%c")+ 'Turning off Continuous Logging')
 		send_cmd("C,0")
 		lines = read_lines()
-		logging.info(time.strftime("%c") + 'Response - ' + lines[0])
+		print len(lines)
+		for i in range(len(lines)):
+			print lines[i]
+		#logging.info(time.strftime("%c") + 'Response - ' + lines[0])
 		# turn off continuous mode
 		# clear all previous data
 		lines = []
+		print 'flush lines'
+		print len(lines)
 		ser.flush()
 		print "Waiting 5 seconds to begin logging"
 		#time.sleep(5)
