@@ -81,7 +81,7 @@ if __name__ == "__main__":
 		sys.exit(0)
 
 	while True:
-			delaytime = [1]
+			delaytime = 1
 	
 			send_cmd("C,0") # turn off continuous mode
 			#clear all previous data
