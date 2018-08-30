@@ -97,9 +97,9 @@ if __name__ == "__main__":
 					lines = read_lines()
 					for i in range(len(lines)):
 						print lines[i]
-						logging.info(time.strftime("%c") + 'ORP Reading ' + str(i))
 						if lines[i][0] != '*':
-							print "Response: " , lines[i]
+							logging.info(time.strftime("%c") + ' ORP Reading ' + lines[i])
+                            #print "Response: " , lines[i]
 					time.sleep(delaytime)
 
 			except KeyboardInterrupt: 		# catches the ctrl-c command, which breaks the loop above
