@@ -105,6 +105,7 @@ if __name__ == "__main__":
 					while True:
 						lines = []
 						send_cmd("R")
+						time.sleep(1.3)
 						lines = read_lines()
 						print len(lines)
 						for i in range(len(lines)):
