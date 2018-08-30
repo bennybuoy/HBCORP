@@ -96,7 +96,7 @@ if __name__ == "__main__":
 		# turn off continuous mode
 		# clear all previous data
 		print "Waiting 5 seconds to begin logging"
-		time.sleep(5)
+		#time.sleep(5)
 		ser.flush()
 		with open("log.csv", "a") as log:
 			while True:
