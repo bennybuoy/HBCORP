@@ -95,8 +95,8 @@ if __name__ == "__main__":
 		send_cmd("C,0") 
 		# turn off continuous mode
 		# clear all previous data
-		time.sleep(5)
 		print "Waiting 5 seconds to begin logging"
+		time.sleep(5)
 		ser.flush()
 		with open("log.csv", "a") as log:
 			while True:
@@ -105,14 +105,9 @@ if __name__ == "__main__":
 						send_cmd("R")
 						lines = read_lines()
 						print len(lines)
-						for i in range(len(lines)):
-							print lines[i]
-						
-						#for i in range(len(lines)):
-						#	print lines[i]
-							#if lines[i][0] != '*':
-							#logging.info(time.strftime("%c") + ' ORP Reading ' + lines[i])
-							#log.write("{0},{1}\n".format(time.strftime("%c"),lines[i]))
-							#time.sleep(delaytime)								
+						print lines[0] + ' ' + lines[1]
+						logging.info(time.strftime("%c") + ' ORP Reading ' + lines[0] + ',' + lines[1])
+						log.write("{0},{1},{2}\n".format(time.strftime("%c"),lines[0],lines[1]))
+						time.sleep(delaytime)								
 				except KeyboardInterrupt:
 					exitprog()
