@@ -84,13 +84,13 @@ if __name__ == "__main__":
 
 	while True:
 		delaytime = 1
-		logging.info(time.strftime("%c")+ 'Turning off Continuous Logging')
+		# turn off continuous mode
+		logging.info(time.strftime("%c")+ ' Turning off Continuous Logging')
 		send_cmd("C,0")
 		time.sleep(1)
 		lines = read_lines()
 		print lines[0]
-		logging.info(time.strftime("%c") + 'Response - ' + lines[0])
-		# turn off continuous mode
+		logging.info(time.strftime("%c") + ' Response - ' + lines[0])
 		# clear all previous data
 		ser.flush()
 		print "Waiting 5 seconds to begin logging"
@@ -100,9 +100,13 @@ if __name__ == "__main__":
 				try:
 					while True:
 						lines = []
+						print 'Before read'
+						print len(lines)
 						send_cmd("R")
 						lines = read_lines()
-						#print (lines[0] + ' ' + lines[1])
+						print 'After Read'
+						print len(lines)
+						print (lines[0] + ' ' + lines[1])
 						logging.info(time.strftime("%c") + ' ORP Reading ' + lines[0] + ',' + lines[1])
 						log.write("{0},{1},{2}\n".format(time.strftime("%c"),lines[0],lines[1]))
 						time.sleep(delaytime)								
