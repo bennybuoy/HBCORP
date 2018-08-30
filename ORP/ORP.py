@@ -60,7 +60,11 @@ def send_cmd(cmd):
 		print "Error, ", e
 		logging.error(time.strftime("%c") + e)
 		return None
-			
+
+def exitprog():
+    logging.info(time.strftime("%c") + ' Exiting ')
+    sys.exit(0)
+
 if __name__ == "__main__":
 	logging.info(time.strftime("%c")+ 'Main app started ')
 	print "\nHBC ORP Logger\n"
@@ -77,8 +81,7 @@ if __name__ == "__main__":
 	except serial.SerialException as e:
 		logging.error(time.strftime("%c") + str(e))
 		print "Error, ", e
-		logging.info(time.strftime("%c") + ' Exiting')
-		sys.exit(0)
+		exitprog()
 
 	while True:
 			delaytime = 1
@@ -103,8 +106,6 @@ if __name__ == "__main__":
 					time.sleep(delaytime)
 
 			except KeyboardInterrupt: 		# catches the ctrl-c command, which breaks the loop above
-				print("Continuous polling stopped")
-                logging.info(time.strftime("%c") + ' Exiting')
-		        sys.exit(0)
+				exitprog()
 	
 		# if not a special keyword, pass commands straight to board
