@@ -103,6 +103,7 @@ if __name__ == "__main__":
 			while True:
 				try:
 					while True:
+						lines = []
 						send_cmd("R")
 						lines = read_lines()
 						print len(lines)
