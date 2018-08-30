@@ -4,7 +4,8 @@ import serial
 import time
 import logging
 import sys
-import string 
+import string
+import csv
 from serial import SerialException
 
 logging.basicConfig(filename='ORPapp.log',level=logging.DEBUG)
@@ -95,8 +96,9 @@ if __name__ == "__main__":
 		ser.flush()
 		print "Waiting 5 seconds to begin logging"
 		#time.sleep(5)
-		with open("log.csv", "a") as log:
-			while True:
+		with open('log.csv', 'w', newline='') as f:
+			log = csv.writer(f)
+    		while True:
 				try:
 					while True:
 						lines = []
@@ -109,6 +111,6 @@ if __name__ == "__main__":
 						print len(lines)
 						print (lines[0] + ' ' + lines[1])
 						logging.info(time.strftime("%c") + ' ORP Reading ' + lines[0] + ',' + lines[1])
-						log.write("{0},{1},{2}\n".format(time.strftime("%c"),lines[0],lines[1])								
+						log.writerows(time.strftime("%c"),lines[0],lines[1])
 				except KeyboardInterrupt:
 					exitprog()
