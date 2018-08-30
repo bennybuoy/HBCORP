@@ -104,5 +104,7 @@ if __name__ == "__main__":
 
 			except KeyboardInterrupt: 		# catches the ctrl-c command, which breaks the loop above
 				print("Continuous polling stopped")
+                logging.info(time.strftime("%c") + ' Exiting')
+		        sys.exit(0)
 	
 		# if not a special keyword, pass commands straight to board
