@@ -97,8 +97,7 @@ if __name__ == "__main__":
 		print "Waiting 5 seconds to begin logging"
 		#time.sleep(5)
 		with open('log2.csv', 'w') as csvfile:
-			fieldnames = ['date_time', 'ORP_reading']
-			writer = csv.writer(csvfile)
+			log = csv.writer(csvfile)
     		while True:
 				try:
 					while True:
@@ -111,6 +110,6 @@ if __name__ == "__main__":
 						print 'After Read'
 						print len(lines)
 						print (lines[0] + ' ' + lines[1])
-						writer.writerow([time.strftime("%c"), lines[1]])
+						log.writerow([time.strftime("%c"), lines[1]])
 				except KeyboardInterrupt:
 					exitprog()
