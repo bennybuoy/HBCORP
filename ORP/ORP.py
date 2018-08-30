@@ -107,7 +107,7 @@ if __name__ == "__main__":
 							print lines[i]
 							if lines[i][0] != '*':
 								logging.info(time.strftime("%c") + ' ORP Reading ' + lines[i])
-								log.write("{0},{1}\n".format(strftime("%c"),lines[i]))
+								log.write("{0},{1}\n".format(time.strftime("%c"),lines[i]))
 								time.sleep(delaytime)								
 				except KeyboardInterrupt:
 					exitprog()
