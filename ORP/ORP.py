@@ -89,7 +89,7 @@ if __name__ == "__main__":
 			ser.flush()
 			
 			# get the information of the board you're polling
-			print("Polling sensor every 1 seconds, press ctrl-c to stop polling" % delaytime)
+			#print("Polling sensor every 1 seconds, press ctrl-c to stop polling" % delaytime)
 	
 			try:
 				while True:
