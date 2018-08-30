@@ -109,6 +109,6 @@ if __name__ == "__main__":
 						print len(lines)
 						print (lines[0] + ' ' + lines[1])
 						logging.info(time.strftime("%c") + ' ORP Reading ' + lines[0] + ',' + lines[1])
-						log.write("{0},{1},{2}\n".format(time.strftime("%c")),lines[0],lines[1])								
+						log.write("{0},{1},{2}\n".format(time.strftime("%c"),lines[0],lines[1])								
 				except KeyboardInterrupt:
 					exitprog()
