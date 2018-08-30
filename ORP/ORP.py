@@ -96,8 +96,8 @@ if __name__ == "__main__":
 		ser.flush()
 		print "Waiting 5 seconds to begin logging"
 		#time.sleep(5)
-		with open('log2.csv', 'w') as csvfile:
-			log = csv.writer(csvfile)
+		with open('log2.csv', 'w') as f:
+			log = csv.writer(f,delimeter=",")
     		while True:
 				try:
 					while True:
