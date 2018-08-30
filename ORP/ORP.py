@@ -104,11 +104,10 @@ if __name__ == "__main__":
 					while True:
 						send_cmd("R")
 						lines = read_lines()
-						for i in range(len(lines)):
-							print lines[i]
-							#if lines[i][0] != '*':
-							logging.info(time.strftime("%c") + ' ORP Reading ' + lines[i])
-							log.write("{0},{1}\n".format(time.strftime("%c"),lines[i]))
-							time.sleep(delaytime)								
+						print lines[0], lines[1]
+						#if lines[i][0] != '*':
+						logging.info(time.strftime("%c") + ' ORP Reading ' + lines[1])
+						log.write("{0},{1},{2}\n".format(time.strftime("%c"),lines[0],lines[1]))
+						time.sleep(delaytime)								
 				except KeyboardInterrupt:
 					exitprog()
