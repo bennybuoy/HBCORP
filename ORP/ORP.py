@@ -64,14 +64,6 @@ def exitprog():
 	logging.info(time.strftime("%c") + ' Exiting ')
 	sys.exit(0)
 
-def write_to_csv(reading):
-	filename="dataLog.csv"
-	datafile=open(filename, 'a')
-	while True:
-		datafile.write()
-
-	datafile.close()
-
 if __name__ == "__main__":
 	logging.info(time.strftime("%c")+ 'Main app started ')
 	print "\nHBC ORP Logger\n"
@@ -92,12 +84,16 @@ if __name__ == "__main__":
 
 	while True:
 		delaytime = 1
-		send_cmd("C,0") 
+		logging.info(time.strftime("%c")+ 'Turning off Continuous Logging')
+		send_cmd("C,0")
+		lines = read_lines()
+		logging.info(time.strftime("%c") + 'Response - ' + lines[0])
 		# turn off continuous mode
 		# clear all previous data
+		lines = []
+		ser.flush()
 		print "Waiting 5 seconds to begin logging"
 		#time.sleep(5)
-		ser.flush()
 		with open("log.csv", "a") as log:
 			while True:
 				try:
