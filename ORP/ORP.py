@@ -75,7 +75,7 @@ if __name__ == "__main__":
 	try:
 		ser = serial.Serial(usbport, 9600, timeout=0)
 	except serial.SerialException as e:
-		logging.error(time.strftime("%c") + e)
+		logging.error(time.strftime("%c") + str(e))
 		print "Error, ", e
 		logging.info(time.strftime("%c") + ' Exiting')
 		sys.exit(0)
@@ -97,7 +97,7 @@ if __name__ == "__main__":
 					lines = read_lines()
 					for i in range(len(lines)):
 						print lines[i]
-						logging.info(time.strftime("%c") + 'ORP Reading ' + i)
+						logging.info(time.strftime("%c") + 'ORP Reading ' + str(i))
 						if lines[i][0] != '*':
 							print "Response: " , lines[i]
 					time.sleep(delaytime)
