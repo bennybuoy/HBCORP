@@ -4,7 +4,6 @@ import serial
 import time
 import logging
 import sys
-import time
 import string 
 from serial import SerialException
 
@@ -62,8 +61,16 @@ def send_cmd(cmd):
 		return None
 
 def exitprog():
-    logging.info(time.strftime("%c") + ' Exiting ')
-    sys.exit(0)
+	logging.info(time.strftime("%c") + ' Exiting ')
+	sys.exit(0)
+
+def write_to_csv(reading):
+	filename="dataLog.csv"
+	datafile=open(filename, 'a')
+	while True:
+		datafile.write()
+
+	datafile.close()
 
 if __name__ == "__main__":
 	logging.info(time.strftime("%c")+ 'Main app started ')
@@ -84,28 +91,25 @@ if __name__ == "__main__":
 		exitprog()
 
 	while True:
-			delaytime = 1
-	
-			send_cmd("C,0") # turn off continuous mode
-			#clear all previous data
-			time.sleep(1)
-			ser.flush()
-			
-			# get the information of the board you're polling
-			#print("Polling sensor every 1 seconds, press ctrl-c to stop polling" % delaytime)
-	
-			try:
-				while True:
-					send_cmd("R")
-					lines = read_lines()
-					for i in range(len(lines)):
-						print lines[i]
-						if lines[i][0] != '*':
-							logging.info(time.strftime("%c") + ' ORP Reading ' + lines[i])
-                            #print "Response: " , lines[i]
-					time.sleep(delaytime)
-
-			except KeyboardInterrupt: 		# catches the ctrl-c command, which breaks the loop above
-				exitprog()
+		delaytime = 1
+		send_cmd("C,0") 
+		# turn off continuous mode
+		#clear all previous data
+		time.sleep(1)
+		ser.flush()
+		with open("log.csv", "a") as log:
+			while True:
+				try:
+					while True:
+						send_cmd("R")
+						lines = read_lines()
+						for i in range(len(lines)):
+							print lines[i]
+							if lines[i][0] != '*':
+								logging.info(time.strftime("%c") + ' ORP Reading ' + lines[i])
+								log.write("{0},{1}\n".format(strftime("%c"),lines[i]))
+								time.sleep(delaytime)								
+				except KeyboardInterrupt:
+					exitprog()
 	
 		# if not a special keyword, pass commands straight to board
