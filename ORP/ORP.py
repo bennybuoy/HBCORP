@@ -96,7 +96,7 @@ if __name__ == "__main__":
 		ser.flush()
 		print "Waiting 5 seconds to begin logging"
 		#time.sleep(5)
-		with open('log.csv', 'w') as csvfile:
+		with open('log2.csv', 'w') as csvfile:
 			fieldnames = ['date_time', 'ORP_reading']
 			writer = csv.writer(csvfile)
     		while True:
