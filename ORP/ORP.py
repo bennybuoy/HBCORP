@@ -120,6 +120,7 @@ if __name__ == "__main__":
 					time.sleep(delaytime)
 					lines = read_lines()
 					if lines[0] != "*OK":
-						compare_and_record(lines[0].strip)
+						lines[0] = lines[0].strip
+						compare_and_record(lines[0])
 			except KeyboardInterrupt:
 					exitprog()
