@@ -119,6 +119,6 @@ if __name__ == "__main__":
 					send_cmd("R")
 					time.sleep(delaytime)
 					lines = read_lines()
-					compare_and_record(lines[1])
+					compare_and_record(lines[0])
 			except KeyboardInterrupt:
 					exitprog()
