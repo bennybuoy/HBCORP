@@ -109,7 +109,7 @@ if __name__ == "__main__":
 		# clear all previous data
 		ser.flush()
 		print "Waiting 5 seconds to begin logging"
-		#time.sleep(5)
+		time.sleep(5)
 		while True:
 			try:
 				while True:
@@ -119,6 +119,7 @@ if __name__ == "__main__":
 					send_cmd("R")
 					time.sleep(delaytime)
 					lines = read_lines()
-					compare_and_record(lines[0])
+					if lines[0] != "*OK":
+						compare_and_record(lines[0].strip)
 			except KeyboardInterrupt:
 					exitprog()
