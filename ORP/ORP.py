@@ -8,11 +8,13 @@ import string
 import csv
 from serial import SerialException
 
+
 logging.basicConfig(filename='ORPapp.log',level=logging.DEBUG)
-last_reading= 0
+last_reading = 0
 
 def compare_and_record(reading):
     global last_reading
+
     if reading != last_reading:
        record(reading)
        last_reading=reading
@@ -25,6 +27,11 @@ def record(reading):
         log = csv.writer(f)
         log.writerow([time.strftime("%c"), reading])
     f.close
+
+def clean_reading(reading):
+	temp = reading.strip()
+	print(temp)
+	return temp
 
 def read_line():
 	"""
@@ -119,8 +126,8 @@ if __name__ == "__main__":
 					send_cmd("R")
 					time.sleep(delaytime)
 					lines = read_lines()
+					lines[0] = lines[0].strip()
 					if lines[0] != "*OK":
-						lines[0] = lines[0].strip
 						compare_and_record(lines[0])
 			except KeyboardInterrupt:
 					exitprog()
