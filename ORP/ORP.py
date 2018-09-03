@@ -115,6 +115,7 @@ if __name__ == "__main__":
 		ser.flush()
 		print("Waiting 5 seconds to begin logging")
 		time.sleep(5)
+		print("Logging now!")
 		while True:
 			try:
 				while True:
