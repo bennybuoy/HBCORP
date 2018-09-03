@@ -19,11 +19,9 @@ def compare_and_record(reading):
        record(reading)
        last_reading=reading
        return
-    else:
-        print "Nothing written"
 
 def record(reading):
-    with open('log2.csv', 'a') as f:
+    with open('ORP_log.csv', 'a') as f:
         log = csv.writer(f)
         log.writerow([time.strftime("%c"), reading])
     f.close
@@ -65,7 +63,7 @@ def read_lines():
 		return lines
 	
 	except SerialException as e:
-		print "Error, ", e
+		print("Error, ", e)
 		return None	
 
 def send_cmd(cmd):
@@ -80,7 +78,7 @@ def send_cmd(cmd):
 		ser.write(buf)
 		return True
 	except SerialException as e:
-		print "Error, ", e
+		print("Error, ", e)
 		logging.error(time.strftime("%c") + e)
 		return None
 
@@ -90,20 +88,20 @@ def exitprog():
 
 if __name__ == "__main__":
 	logging.info(time.strftime("%c")+ 'Main app started ')
-	print "\nHBC ORP Logger\n"
+	print("\nHBC ORP Logger\n")
 	
 	# to get a list of ports use the command: 
 	# python -m serial.tools.list_ports
 	# in the terminal
 	usbport = '/dev/serial0' # change to match your pi's setup 
 
-	print "Opening serial port now..."
+	print("Opening serial port now...")
 
 	try:
 		ser = serial.Serial(usbport, 9600, timeout=0)
 	except serial.SerialException as e:
 		logging.error(time.strftime("%c") + str(e))
-		print "Error, ", e
+		print("Error, ", e)
 		exitprog()
 
 	while True:
@@ -115,14 +113,12 @@ if __name__ == "__main__":
 		lines = read_lines()
 		# clear all previous data
 		ser.flush()
-		print "Waiting 5 seconds to begin logging"
+		print("Waiting 5 seconds to begin logging")
 		time.sleep(5)
 		while True:
 			try:
 				while True:
 					lines = []
-					print 'Before read'
-					print len(lines)
 					send_cmd("R")
 					time.sleep(delaytime)
 					lines = read_lines()
