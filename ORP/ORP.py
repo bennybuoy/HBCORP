@@ -9,6 +9,22 @@ import csv
 from serial import SerialException
 
 logging.basicConfig(filename='ORPapp.log',level=logging.DEBUG)
+last_reading= 0
+
+def compare_and_record(reading):
+    global last_reading
+    if reading != last_reading:
+       record(reading)
+       last_reading=reading
+       return
+    else:
+        print "Nothing written"
+
+def record(reading):
+    with open('log2.csv', 'a') as f:
+        log = csv.writer(f)
+        log.writerow([time.strftime("%c"), reading])
+    f.close
 
 def read_line():
 	"""
@@ -88,28 +104,21 @@ if __name__ == "__main__":
 		# turn off continuous mode
 		logging.info(time.strftime("%c")+ ' Turning off Continuous Logging')
 		send_cmd("C,0")
-		time.sleep(1)
+		time.sleep(delaytime)
 		lines = read_lines()
-		print lines[0]
-		logging.info(time.strftime("%c") + ' Response - ' + lines[0])
 		# clear all previous data
 		ser.flush()
 		print "Waiting 5 seconds to begin logging"
 		#time.sleep(5)
-		with open('log2.csv', 'w') as f:
-			log = csv.writer(f,delimeter=",")
-    		while True:
-				try:
-					while True:
-						lines = []
-						print 'Before read'
-						print len(lines)
-						send_cmd("R")
-						time.sleep(delaytime)
-						lines = read_lines()
-						print 'After Read'
-						print len(lines)
-						print (lines[0] + ' ' + lines[1])
-						log.writerow([time.strftime("%c"), lines[1]])
-				except KeyboardInterrupt:
+		while True:
+			try:
+				while True:
+					lines = []
+					print 'Before read'
+					print len(lines)
+					send_cmd("R")
+					time.sleep(delaytime)
+					lines = read_lines()
+					compare_and_record(lines[1])
+			except KeyboardInterrupt:
 					exitprog()
