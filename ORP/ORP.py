@@ -8,8 +8,9 @@ import string
 import csv
 from serial import SerialException
 
+FILE_PATH = "/home/pi/HBCORP/ORP/"
 
-logging.basicConfig(filename='ORPapp.log',level=logging.DEBUG)
+logging.basicConfig(filename=FILE_PATH + 'ORPapp.log',level=logging.DEBUG)
 last_reading = 0
 
 def compare_and_record(reading):
@@ -21,7 +22,7 @@ def compare_and_record(reading):
        return
 
 def record(reading):
-    with open('ORP_log.csv', 'a') as f:
+    with open(FILE_PATH + 'ORP_log.csv', 'a') as f:
         log = csv.writer(f)
         log.writerow([time.strftime("%c"), reading])
     f.close
